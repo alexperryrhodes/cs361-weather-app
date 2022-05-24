@@ -1,0 +1,63 @@
+/* Variables */
+
+
+:root {
+    --background-color: #e5e4e2;
+	--accent-color: #c0c0c0;
+    --main-font-color: #1b1b1b;
+	--body-font: Verdana;
+    --edge-margin: 40px;
+}
+
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic Styling */
+
+body {
+    font-family: var(--body-font), sans-serif ;
+    line-height: 2.25em;
+    color: var(--main-font-color);
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+.search {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.search label {
+    padding-right: 20px;
+}
+
+.current-weather-detail {
+    background-color: var(--accent-color);
+}
+
+.current-weather-detail, .current-weather-main, .forecast-weather, .footer, .search {
+    margin: var(--edge-margin);
+}
+
+ul {
+    list-style: none;
+}
+
+.current-weather-detail ul li, .current-weather-main ul li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.button {
+    background-color: var(--accent-color);
+    color: black;
+    padding: 15px 25px;
+    text-decoration: none;
+    margin: 20px;
+    border-radius: 2em;
+}

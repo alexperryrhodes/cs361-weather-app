@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#141529" media="(prefers-color-scheme: light)">
+
+    <title>Weather</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+
+    <!-- <section class="search"> -->
+        <form method="post" action="/weather" enctype="multipart/form-data" class="search">
+            <label for="zip">Zip Code:</label><br>
+            <input type="text" id="zip" name="zip"><br>
+            <input type="submit" value="Submit">
+        </form>
+    <!-- </section> -->
+
+    
+    <h1>{{curr_data.location.name}}</h1>
+    
+    <section class="current-weather-detail">
+        <ul>
+            <li>Wind: {{ curr_data.current.wind_mph }}</li>
+            <li>Humidity: {{ curr_data.current.humidity }}</li>
+            <li>UV: {{ curr_data.current.uv }}</li>
+            <li>Visibility:{{ curr_data.current.vis_miles }}</li>
+            <li>Pressure: {{ curr_data.current.pressure_in }}</li>
+        </ul>
+    </section>
+
+    <section class="current-weather-main">
+        <h1>{{ curr_data.current.temp_f }} {{ curr_data.current.condition.text }}</h1>
+        <ul>
+            <li>Feels Like: {{ curr_data.current.feelslike_f }}</li>
+            <li>Low: {{ fore_weather.forecast.forecastday[0].day.mintemp_f }}</li>
+            <li>High: {{ fore_weather.forecast.forecastday[0].day.maxtemp_f }}</li>
+        </ul>
+    </section>
+
+    <section class="chart-configuation">
+        <form method="post" action="/weather" enctype="multipart/form-data">
+
+            <label for="chart-type">Chart Type:</label>
+            <select id="chart-type" name="chart-type">
+                <option value="line">Line</option>
+                <option value="bar">Bar</option>
+                <option value="scatter">Scatter</option>
+            </select>
+
+            <label for="time-type">Time Period:</label>
+            <select id="time-type" name="time-type">
+                <option value="Historic">Historic</option>
+                <option value="Forecast">Forecast</option>
+            </select>
+
+            <label for="data-type">Data Type:</label>
+            <select id="data-type" name="data-type">
+                <option value="Temperature">Temperature</option>
+                <option value="Precipitation">Precipitation</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <section class="chart">
+        <img src="{{url_for('static', filename='weather_chart.png')}}"/>
+    </section>
+
+    <section class="forecast-weather">
+        <ul>
+            <li>Today: Min: {{ fore_weather.forecast.forecastday[0].day.mintemp_f  }} Max: {{ fore_weather.forecast.forecastday[0].day.maxtemp_f }}</li>
+            <li>{{ format_date(fore_weather.forecast.forecastday[1].date)}}: Min: {{ fore_weather.forecast.forecastday[1].day.mintemp_f  }} Max: {{ fore_weather.forecast.forecastday[1].day.maxtemp_f }}</li>
+            <li>{{ format_date(fore_weather.forecast.forecastday[2].date)}}: Min: {{ fore_weather.forecast.forecastday[2].day.mintemp_f  }} Max: {{ fore_weather.forecast.forecastday[2].day.maxtemp_f }}</li>
+        </ul>
+    </section>
+
+    <a class="button" href="/">Logout</a>
+
+    <footer class="footer">Copyright © 2022 Alexandra Rhodes</footer>
+
+
+</body>
+
+</html>
